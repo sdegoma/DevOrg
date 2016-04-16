@@ -1,0 +1,120 @@
+<apex:page standardController="TestObject1__c">
+
+    <flow:interview name="flow1">
+        <apex:param name="DisplayID" value="{!TestObject1__c.Account__r.Id}"/>
+    </flow:interview>
+
+        <!--<apex:form >
+            <apex:PageBlock >
+                <apex:PageBlockSection >
+                    <apex:inputText id="theSubject" label="Subject: " html-placeholder="Subject"/><br/>
+                    <apex:inputText id="theDescription" label="Description: " html-placeholder="Description"/><br/>
+                    <apex:outputLabel style="margin-left:185px;">Date: </apex:outputLabel><input id = "theDate" type = "date" style = "position: relative;left: -415px;"/>
+                    <apex:commandButton value="Create" onClick="setEventArgs();" reRender="none"/>
+                </apex:PageBlockSection>
+            </apex:PageBlock>
+        </apex:form>
+        
+        <script type="text/javascript" src="https://apis.google.com/js/client.js?"></script>
+        <script>
+        
+            //Google Authentication
+            var eventArg;
+            var apiKey;
+            var CLIENT_ID;
+            var SCOPES;
+             
+            
+            //Google Authentication
+            function setGoogelAuth(akey,client,sco){
+                apiKey = akey; //'AIzaSyBnysvATBLeecpWnezOyaWfX7gQzJonHLo';
+                CLIENT_ID = client; //'890164006618-1hacpqq6br6rr7on400sc0t9j87k5id3.apps.googleusercontent.com';
+                SCOPES = sco; //'https://www.googleapis.com/auth/calendar'; 
+            }
+            
+            function handleClientLoad() {
+                gapi.client.setApiKey(apiKey);
+                window.setTimeout(checkAuth, 1);
+            }
+            // will check for the authentication if the whether the user is already logged in to his/her google account
+            function checkAuth() {
+                gapi.auth.authorize({
+                    'client_id': CLIENT_ID, 
+                    'scope': SCOPES, 
+                    'immediate': true
+                },  handleAuthResult);
+            }
+            
+            function handleAuthResult(authResult) {
+                if (authResult && !authResult.error) {
+                    // Successfully authenticated to Google Drive
+                    console.log(authResult);
+                    //addEvent(eventArg);
+                    insertGoogleEvent();
+                } else {
+                    // No access token could be retrieved re-authenticate
+                    console.log('Error');
+                    googleLogin();
+                    
+                    //var newURL = popupWindow.location.href;
+                    //alert('sa');   
+                    //alert(newURL);       
+                }
+            }    
+            function googleLogin(){
+                gapi.auth.authorize({
+                    'client_id': CLIENT_ID, 
+                    'scope': SCOPES, 
+                    'immediate': false
+                },  handleAuthResult);
+            }
+            
+            //Event Creation - Please update the method to enter correct details THX
+            function insertGoogleEvent(){
+                var subject = document.getElementById('j_id0:j_id1:j_id2:j_id3:theSubject').value;
+                var descri = document.getElementById('j_id0:j_id1:j_id2:j_id3:theDescription').value;
+                var eventDate = document.getElementById('theDate').value;
+                
+                var resource = {    
+                  "summary": subject,
+                  "location": "",
+                  "description": descri,
+                  "start": {
+                    "date": eventDate
+                  },
+                  "end": {
+                    "date": eventDate
+                  }
+                };
+                gapi.client.load('calendar', 'v3', function() {  
+                    var request = gapi.client.calendar.events.insert({
+                      'calendarId': 'primary',
+                      'resource': resource
+                    });
+                    request.execute(function(resp) {
+                        console.log(resp);
+                        if (resp.id){
+                            addedAlert();
+                        }
+                    });
+                });
+            }
+            
+            
+            function setEventArgs(){
+                handleClientLoad();
+            }
+            
+            function addedAlert(){
+                alert('Event has been created');
+            }   
+            
+                        
+            //https://console.developers.google.com/project
+        </script>
+        <script type="text/javascript">
+            setGoogelAuth('{!$Setup.Google_Auth_Settings__c.API_Key__c}','{!$Setup.Google_Auth_Settings__c.Client_Id__c}','{!$Setup.Google_Auth_Settings__c.Scopes__c}');    
+        </script>-->
+        
+        
+</apex:page>

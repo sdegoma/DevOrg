@@ -1,0 +1,57 @@
+<apex:page standardController="Account" extensions="accountTable2" >
+<apex:pageBlock >
+    
+    <apex:pageBlockTable value="{!accounts}" var="account" id="accountController" rowClasses="odd,even" styleClass="tableClass" >
+
+        <apex:facet name="caption"><strong><font size = "5">Account Details</font></strong></apex:facet>
+
+        <apex:facet name="header">Account</apex:facet>
+
+        <apex:column >
+
+            <apex:facet name="header">Name</apex:facet>
+
+            <apex:outputText value="{!account.name}"/>
+
+        </apex:column>
+        
+        <apex:column >
+
+            <apex:facet name="header">Account Number</apex:facet>
+
+            <apex:outputText value="{!account.accountnumber}"/>
+
+        </apex:column>
+
+        <apex:column >
+
+            <apex:facet name="header">Phone</apex:facet>
+
+            <apex:outputText value="{!account.phone}"/>
+
+        </apex:column>
+        
+        <apex:column >
+
+            <apex:facet name="header">Fax</apex:facet>
+
+            <apex:outputText value="{!account.fax}"/>
+
+        </apex:column>
+        
+        <apex:column >
+            <apex:facet name="header">Employees</apex:facet>
+            <apex:outputText value="{!account.numberOfEmployees}"/>
+        </apex:column>
+        
+        <apex:column >
+
+            <apex:facet name="header">Website</apex:facet>
+
+            <apex:outputText value="{!account.website}"/>
+
+        </apex:column>
+
+    </apex:pageBlockTable>
+</apex:pageBlock>
+</apex:page>

@@ -1,0 +1,383 @@
+<apex:page standardController="Quote" extensions="quotesController" showHeader="false" renderAs="PDF" >
+    
+    <head>
+        <style type="text/css">
+            
+              
+            #container{
+                position:relative;
+                margin-left:auto;
+                margin-right:auto;
+                font-size:10px;
+                width:600px; 
+                heigt:auto;
+               
+                
+            }
+            #littlePenguin{ 
+                
+                position:relative;
+                width:100%;
+                height:25px;
+                top:12px;
+                
+                color:white;
+                background-color:black;
+                text-indent:1px;
+                border-style:solid;
+                border-color: black;
+                border-width: 1px;
+               
+            }
+             
+            #littlePenguin p{
+                line-height:19px;
+            }
+            .image{
+                position:relative;
+                left:140px;
+                top:-42px;
+            }
+            #info{ 
+                position:relative;
+            
+                width:100%;
+                height:105px;
+                border-style:solid;
+                border-color: black;
+                border-width: 1px;
+                border-bottom:none;
+                
+            }
+            .textQN{ 
+                position:relative;
+                left:2px;
+                top:15px;
+                font-size:10px;
+                font-weight:bold;
+            }
+            .infoQN{ 
+                text-align:left;
+                left:195px;
+                width:800px;
+                position:relative;
+                border:none;
+                border-bottom:none;
+                top:-20px;
+                font-size:10px;  
+            }
+           
+               
+         
+            #products{
+                position:relative;
+                width:100%;
+                float:left;
+                font-weight: normal;
+                font-size: 10px;
+                
+                   
+            }
+            
+              
+            #US1{
+                float:left;
+                width:49%;
+                text-align:left;
+                text-indent:2px;
+            }
+            #US2{
+                position:relative;
+                left:50%;
+                text-align:right;
+                text-indent:40px;
+                width:49%;
+                
+                
+                
+            }
+            
+            #footer{
+                position:relative;
+                float:left;
+                
+                width:100%;
+                height:105px;
+            
+                border-style:solid;
+                border-color: black;
+                border-width: 1px;
+                border-top:none;
+             
+                
+            }
+            
+            .contents{
+                position:relative;
+                float:left;
+                width:100%;
+                height:50%;
+                text-align:right;
+               
+            }
+            .labels{
+                position:relative;
+                top:1px;
+                width:79%;
+            }
+            .labels li{
+               
+                text-align:right;
+                font-size:10px;
+                font-weight:bold;
+            }
+            .USD{
+                position:relative;
+                left:73%;
+                top:-62px;
+                text-align:left;
+                font-size:10px;
+                
+            }
+            .price{
+                position:relative;
+                left:80.5%;
+               
+                width:19%;
+                top:-123px;
+                text-align:right;
+                font-size:10px;
+                
+            }
+            .addInfo{
+                position:relative;
+             
+                width:100%;
+                top:-121px;
+                left:-39px;
+                text-align:left;
+                font-size:10px;
+                font-weight:bold;
+                
+            }
+            .details{
+                position:relative;
+             
+                width:100%;
+                top:-158px;
+                left:155px;
+                text-align:left;
+                font-size:10px;
+                
+            }
+            table{
+                width:100.4%;
+            }
+           
+            tr, th{
+               
+                height:15px;
+                
+             
+            }
+            
+            p{
+                line-height:20%
+            }
+            li{
+                line-height:13px;
+                list-style:none;
+            }
+          
+          
+        </style>
+    </head>
+    <div id ="container">
+        <div id = "littlePenguin">
+               
+           <p>Little Penguin Print Design</p>
+           <div class = "image"><apex:image id="littlePenguin" value="{!$Resource.littlePenguin}" width="40" height="25"/></div>
+        </div>
+        <div id = "info">
+            <div class = "textQN">
+                        
+                        <p>Quote Number:</p>
+          				
+                        <p>Bill To:</p>
+            
+            </div>
+            <div class = "infoQN">
+           
+                <apex:dataTable value="{!quotes}" var="quote" id="quotesCotroller" rowClasses="odd,even" styleClass="tableClass">
+                    
+                    <apex:column >
+                    
+                        <p><apex:outputText value="{!quote.QuoteNumber}"/></p>    
+                        <p><apex:outputText value="{!quote.bill_to__r.name} "/> </p>
+                        <p><apex:outputText value="{!quote.bill_to__r.billingstreet}"/></p> 
+                        <p><apex:outputText value="{!quote.bill_to__r.billingCity}, "/>
+                        <apex:outputText value="{!quote.bill_to__r.billingstate} "/>
+                        <apex:outputText value="{!quote.bill_to__r.billingpostalcode}"/> </p>
+                        <p><apex:outputText value="{!quote.bill_to__r.billingCountry}"/></p>
+                         
+                         
+                         
+                    </apex:column>
+        
+                    
+                </apex:dataTable>
+            </div>
+        </div>
+        <div id  = "title">
+            
+            <!-- <Table>
+                <tr>
+                    <th width="30%" >
+                        Products
+                    </th>
+                    <th width="35%" >
+                        Description
+                    </th>
+                    <th width="13.5%">
+                        Unit Price
+                    </th>
+                    <th width="8%">
+                        Quantity
+                    </th>
+                    <th width="13.5%">
+                        Total Price
+                    </th>
+                </tr>
+            </Table> -->
+        </div>
+               
+        
+            
+        <div id  = "products">
+            <apex:dataTable border="1" width="1002"  value="{!quotelineitems}" var="quotelineitem" id="quotesCotrollers3" rowClasses="odd,even" styleClass="tableClass">
+
+                <apex:column width="32%" >
+                    <apex:facet name="header" ><center>Products</center></apex:facet>
+                    <center><apex:outputText value="{!quotelineitem.product__r.name}"/></center> 
+                </apex:column>
+                <apex:column width="33%" >
+                    <apex:facet name="header" ><center>Description</center></apex:facet>
+                    <center><apex:outputText value="{!quotelineitem.product__r.Description__c}"/></center>
+                    
+                </apex:column>
+                <apex:column width="13.5%">
+                    <apex:facet name="header" ><center>Unit Price</center></apex:facet>
+                    <div>
+                        <div id = "US1">
+                            USD
+                        </div>
+                        <div id = "US2">
+                            <apex:outputText value="{!quotelineitem.product__r.Unit_Price__c}"/>
+                        </div>
+                    </div>
+                </apex:column>
+                <apex:column width="8%">
+                    <apex:facet name="header" ><center>Quantity</center></apex:facet>
+                    <center><apex:outputText value="{!FLOOR(quotelineitem.Quantity)}"/></center>
+                </apex:column>
+                <apex:column width="13.5%">
+                    <apex:facet name="header" ><center>Total Price</center></apex:facet>
+                    <div>
+                        <div id = "US1">
+                            USD
+                        </div>
+                        <div id = "US2">
+                            <apex:outputText value="{!quotelineitem.Total_Price__c}"/>
+                        </div>
+                    </div>
+                </apex:column> 
+                  
+            </apex:dataTable>
+            
+              
+            
+            <!-- <table>
+                <tr>
+                    <th width="30%" >        
+                    </th>
+                    <th width="35%" >    
+                    </th>
+                    <th width="13.5%">    
+                    </th>
+                    <th width="8%">      
+                    </th>
+                    <th width="13.5%">      
+                    </th>
+                </tr>
+                <tr>
+                    <th width="30%" >        
+                    </th>
+                    <th width="35%" >    
+                    </th>
+                    <th width="13.5%">    
+                    </th>
+                    <th width="8%">      
+                    </th>
+                    <th width="13.5%">      
+                    </th>
+                </tr>
+                <tr>
+                    <th width="30%" >        
+                    </th>
+                    <th width="35%" >    
+                    </th>
+                    <th width="13.5%">    
+                    </th>
+                    <th width="8%">      
+                    </th>
+                    <th width="13.5%">      
+                    </th>
+                </tr>
+            </table> -->
+        </div>
+        <div id = "footer">
+          
+           
+           <div class = "contents">
+                <div class = "labels">
+                   <ul>
+                       <li>Subtotal:</li>
+                       <li>Tax:</li> 
+                       <li>Shipping and Handling:</li>
+                       <li>Grand Total:</li>
+                   </ul>
+              
+               </div>
+               <div class = "USD">
+                   <ul>
+                       <li>USD</li>
+                       <li>USD</li>
+                       <li>USD</li>
+                       <li>USD</li>
+                   </ul>
+               </div>
+               <div class = "price">
+                   <ul>
+                       <li>{!subTotal}</li>
+                       <li>{!Tax}</li>
+                       <li>0</li>
+                       <li>{!grandTotal}</li>
+                   </ul>     
+               </div>
+               <div class = "addInfo">
+                   <ul>
+                       <li>Prepared By:</li>
+                       <li>Created Date:</li>
+                   </ul>
+               </div>
+               <div class = "details">
+                   <ul>
+                       <li>{!Users}</li>
+                       <li>{!Dates}</li>
+                   </ul>
+               </div>
+           </div>
+        </div>
+  </div>
+
+</apex:page>

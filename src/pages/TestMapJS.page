@@ -1,0 +1,12 @@
+<apex:page controller="TestMapJSCC">
+    <script>
+        var myMap = new Map();
+        
+        var text = '{!serializedFields}' ;
+        
+        myMap = JSON.parse(text);
+        alert(myMap["CSField 2"].attributes.type);
+     
+ 
+    </script>
+</apex:page>

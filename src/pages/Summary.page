@@ -1,0 +1,61 @@
+<!--
+/**
+ * @description Dynamic Summary Page.
+ * @author Created By Noy De Goma
+ * @date Created Date Aug 2, 2013
+ */
+-->
+<apex:page controller="SummaryCC" >
+<head>
+	<title></title>
+	<style type="text/css">
+		#table{
+			width:auto;
+		}
+	</style>
+</head>
+<apex:pagemessages />
+<apex:form >
+	
+
+	<apex:pageBlock id="block1">
+		
+		<div id = "table">
+		<apex:pageBlockSection title="Summary of Courses" collapsible="false" columns="1">
+		<!-- <apex:outputPanel >
+			<table>
+				<tr>
+					<th>asasasa</th>
+					<td style = "width:10px;"></td>
+					<td>
+						<div class = "requiredInput">	
+							<div class = "requiredBlock"></div>
+							<apex:inputTextArea label="Comments" value="{!q.Question__c}" required="true"/>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</apex:outputPanel> -->
+			<apex:pageBlockTable columns="3" value="{!examMap}" var="EM" id="QATable"  style="width:100%;">
+	             <apex:column style="width:40%;height:22px;" >
+	             	<apex:facet name="header">Exam</apex:facet>
+	             	<apex:outputText value="{!examMap[EM].name}" style="font-weight:bolder;" />
+	             </apex:column>
+	             <apex:column style="width:30%;">
+	             	<apex:commandButton value="Take Exam" action="{!onRedirectToExam}" rerender="Block1">
+	             		<apex:param name="examType" value="{!examMap[EM].name}" />
+	             	</apex:commandButton>
+	             	
+	             </apex:column>
+	         </apex:pageBlockTable>
+         </apex:pageBlockSection>
+         </div>
+	</apex:pageBlock>
+</apex:form>
+<script src="{!$Resource.JQuery}">
+ </script>
+ <script src="{!$Resource.JQueryUI}">
+ </script>
+ <script src="{!$Resource.SummaryBehavior}">
+ </script>
+</apex:page>

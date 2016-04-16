@@ -1,0 +1,9 @@
+<apex:component >
+    <apex:attribute name="selValue" description="This is the selected value for the component."
+                    type="String" required="true"/>
+    <apex:attribute name="myValues" description="This is the selected value for the component."
+                    type="String" required="true"/>
+    <apex:selectList value="{!selValue}" size="1" required="true">
+   		<apex:selectOptions value="{!myValues}"/>
+    </apex:selectList>
+</apex:component>

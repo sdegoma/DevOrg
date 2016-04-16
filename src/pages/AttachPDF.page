@@ -1,0 +1,9 @@
+<apex:page standardController="Quote" extensions="quotesController" showHeader="false" action="{!AttachPDF}" >
+	<!-- <apex:dataTable value="{!quotes}" var="quote" id="dTable" >
+	      <apex:pageBlock >
+	          <apex:pageBlockSection >
+	            <apex:inputFile accept="doc, txt, pdf" filename="{!fName}" contentType="{!cType}" value="{!b}"/>
+	          </apex:pageBlockSection>
+	       </apex:pageBlock>
+	</apex:dataTable>-->
+</apex:page>

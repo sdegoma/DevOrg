@@ -1,0 +1,32 @@
+<!--
+/**
+ * @description Dynamic Result Page.
+ * @author Created By Noy De Goma
+ * @date Created Date Aug 1, 2013
+ */
+-->
+<apex:page controller="ExamResultCC" showheader="false" action="{!UpdateGrade}">
+	<head>
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{!$Resource.ExamResultDesign}"/>  
+	</head>
+	<apex:form >
+		<apex:commandLink value="Back to Summary" action="{!onReturn}"/>
+	</apex:form>
+	
+	<div id = "container">
+		<div id = "result">
+			<apex:outputLabel id="result" value="{!result}"/>
+		</div>
+	</div>
+	
+	<div id = "container2">
+		<div id = "result">
+			<apex:outputLabel id="score" value="{!score}"/>
+		</div>
+	</div>
+	<script src = "{!$Resource.JQuery}">	
+	</script>
+	<script src ="{!$Resource.ExamResultBehavior}">	
+	</script>
+</apex:page>

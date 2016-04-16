@@ -1,0 +1,48 @@
+<!-- 
+/**
+ *@desription this handles the application for leave of the employees
+ *@author Created By Noy De Goma
+ *@date Created Date Aug 8, 2013
+*/
+ -->
+<apex:page Controller="LeaveApplicationCC">
+
+	<apex:form id="mainForm">
+		<apex:pagemessages />
+		<apex:pageBlock >
+			<apex:inputText id="searchTxt" value="{!searchTxt}"/>
+			<apex:commandButton value="Search" action="{!onSearch}" reRender="mainForm"/>
+		</apex:pageBlock>
+		<apex:pageBlock >
+			<!--table that will hold all the employee's information  -->
+			<apex:pageBlockTable value="{!Employees}" var="emp" rowClasses="odd,even" >
+				<apex:column >
+					<!-- title for the column -->
+					<apex:facet name="header">Emp No.</apex:facet>
+					<!-- value for the column -->
+						<apex:commandLink action="{!applyForLeave}" value="{!emp.name}" id="theLink" reRender="mainForm">
+							<apex:param: name="id" value="{!emp.name}"/> 
+						</apex:commandLink>
+				</apex:column>	
+				<apex:column >
+					<!-- title for the column -->
+					<apex:facet name="header">First Name</apex:facet>
+					<!-- value for the column -->
+					<apex:outputText value="{!emp.First_Name__c}"/>
+				</apex:column>
+				<apex:column >
+					<!-- title for the column -->
+					<apex:facet name="header">Last Name</apex:facet>
+					<!-- value for the column -->
+					<apex:outputText value="{!emp.Last_Name__c}"/>
+				</apex:column>
+			</apex:pageBlockTable> 	
+		</apex:pageBlock>
+	</apex:form>
+	<script src = "{!$Resource.JQuery}">
+	</script>
+	<script src = "{!$Resource.JQueryUI}">
+	</script>
+	<script src = "{!$Resource.LeaveApplicationBehavior}">
+	</script>
+</apex:page>

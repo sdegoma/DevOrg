@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Notes Manager</fullName>
+    <apiAccessLevel>Unrestricted</apiAccessLevel>
+    <namespacePrefix>noteMgr</namespacePrefix>
+    <types>
+        <members>NotesManager</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>Notes_Manager</members>
+        <name>Scontrol</name>
+    </types>
+    <version>31.0</version>
+</Package>

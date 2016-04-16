@@ -1,0 +1,57 @@
+<apex:page standardController="Account" extensions="contactTable">
+<apex:pageBlock >
+    
+    <apex:pageBlockTable value="{!contacts}" var="contact" id="theTable" rowClasses="odd,even" styleClass="tableClass">
+
+        <apex:facet name="caption"><strong><font size = "5">Contact Details</font></strong></apex:facet>
+
+        <apex:facet name="header">Contacts</apex:facet>
+
+        <apex:column > 
+
+            <apex:facet name="header">Names</apex:facet>
+
+            <apex:outputText value="{!contact.name}"/>
+
+        </apex:column>
+        
+        <apex:column >
+
+            <apex:facet name="header">Title</apex:facet>
+
+            <apex:outputText value="{!contact.title}"/>
+
+        </apex:column>
+
+        <apex:column >
+
+            <apex:facet name="header">Department</apex:facet>
+
+            <apex:outputText value="{!contact.department}"/>
+
+        </apex:column>
+        
+        <apex:column >
+
+            <apex:facet name="header">Phone</apex:facet>
+
+            <apex:outputText value="{!contact.phone}"/>
+
+        </apex:column>
+        
+        <apex:column >
+            <apex:facet name="header">Mobile</apex:facet>
+            <apex:outputText value="{!contact.mobilephone}"/>
+        </apex:column>
+        
+        <apex:column >
+
+            <apex:facet name="header">Email</apex:facet>
+
+            <apex:outputText value="{!contact.email}"/>
+
+        </apex:column>
+
+    </apex:pageBlockTable>
+</apex:pageBlock>
+</apex:page>

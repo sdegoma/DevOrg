@@ -1,0 +1,188 @@
+<!--
+/**
+ * @description Exam page.
+ * @author Created By Noy De Goma
+ * @date Created Date July 30, 2013
+ */
+-->
+<apex:page controller="ExamCC" showHeader="false" >
+    <head>
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="{!$Resource.ExamDesign}"/>  
+    </head>
+    <div id = "container">
+   
+        <div id = "header">
+            
+            </div> 
+                <div id = "body">
+                    
+                    <div id = "countDown">
+                        <p id = "timer"></p>
+                        <apex:form >
+                            <apex:actionFunction: name="getTime" action="{!SubmitExam}" reRender="mainForm, resultForm" onComplete="CloseLoading();">
+                                <apex:param name="timeTaken" value="x" assignTo="{!timeTaken}"/>
+                            </apex:actionFunction:>
+                            <apex:actionFunction: name="timeStart" reRender="mainForm">
+                                <apex:param name="startValue" value="x" assignTo="{!start}"/>
+                            </apex:actionFunction:>
+                            <apex:actionFunction: name="onTimeRunOut" action="{!onTimeRunsOut}" reRender="mainForm, resultForm">
+                                <apex:param name="time" value="x" assignTo="{!timeTaken}"/>
+                            </apex:actionFunction:>
+                        </apex:form>
+                    </div>
+                    <div id = "result">
+                        
+                        <apex:form id="resultForm">
+                        
+                            <apex:commandLink value="Back to summary" action="{!onReturn}" rendered="{!showResultVisibility}" rerender="none" onClick="ShowLoading();"/>
+                            <apex:pageBlock rendered="{!showResultVisibility}">
+                                <p><apex:outputText value="{!timeTaken}"/></p>
+                                <p><apex:outputText value="{!result}"/></p>
+                                <p><apex:outputText value="Your score is {!correctAnswer}"/></p>
+                                <!-- <p><apex:commandLink value="View correct answers" action="{!onShowCorrectAnswer}" onClick="ShowLoading();" onComplete="CloseLoading();" reRender="mainForm, resultForm"/></p> -->
+                            </apex:pageBlock>
+                            
+                            <div id = "info"> 
+	                            <apex:pageBlock rendered="{!showResultVisibility}">
+	                                <apex:outputText value="Choices with highlights are the correct answers" />
+	                            </apex:pageBlock>
+	                        </div>
+	                        <apex:repeat value="{!QandAWrapperList}" var="qw" rendered="{!showResultVisibility}">
+	                            <apex:pageblock >
+	                            
+	                                <apex:pageBlockSection collapsible="false" columns="1" showHeader="false">
+	                                    <apex:outPutLabel value="Question {!qw.index} of {!qLimit}" style="font-weight:bolder"/>
+	                                    <apex:dataTable value="{!qw.question}" var="Question" id="QTable" rowClasses="odd.even" styleClass="TableClass">
+	                                        <apex:column >
+	                                            <p><apex:outPutText value="{!Question.Question__c}"/></p>
+	                                        </apex:column>
+	                                    </apex:dataTable>
+	                                </apex:pageBlockSection>
+	                                
+	                                <apex:pageblockSection collapsible="false" columns="1" title="Choices">
+	                                        <!-- table for choices  -->
+	                                        <apex:pageBlockTable value="{!qw.choiceWrapList}" var="Choices" id="QATable" rowClasses="odd.even" styleClass="TableClass"  >
+	                                            <div id = "chkDiv">
+	                                            	<apex:variable var="bool" value="{!Choices}" />
+	                                                <apex:column style="width:2%;background-color:{!Choices.color};">
+	                                                    <apex:inputCheckBox id="chkAnswer" value="{!Choices['selected']}" disabled="true">
+	                                                    </apex:inputCheckBox>
+	                                                </apex:column> 
+	                                            </div>
+	                                            <apex:column style="width:98%; background-color:{!Choices.color};" >
+	                                                    <apex:outputText value="{!Choices.questOp.Option__c}"/> 
+	                                            </apex:column>
+	                                            
+	                                        </apex:pageBlockTable>
+	                                        
+	                                    </apex:pageblockSection>
+	                                
+	                            </apex:pageblock>
+	                        </apex:repeat>
+                            
+                        </apex:form>    
+                    </div>    
+                    <div id="fade" class="black_overlay">
+
+                    </div>  
+                    <div class = "white_content">
+                        <!--<apex:actionStatus id="actStatusId" styleClass="child" onstop="CloseLoading();" onStart="ShowLoading();">
+                            <apex:facet name="start" >-->
+                                <div class = "child">
+ 
+                                    <img src="/img/loading.gif" class = "loadingImg"/>
+                   
+                                </div>                   
+                            <!--</apex:facet>
+                        </apex:actionStatus>-->
+                    </div>
+                    <apex:form id="mainForm">
+                        
+                         <apex:outputLabel >
+                         	<apex:pagemessages />
+                         </apex:outputLabel>
+                        
+                        
+                   
+                        <apex:pageblock id="Block1" rendered="{!visibility && start}" >
+                            
+                            <apex:pageBlockSection collapsible="false" columns="1"  showHeader="false">
+                                <apex:outPutLabel value="Question {!ctr + 1} of {!qLimit}" style="font-weight:bolder"/>
+                               
+                                <apex:dataTable value="{!QandAWrapperList[ctr]}" var="Q" id="QTable" rowClasses="odd.even" styleClass="TableClass">
+                                    <apex:column >
+                                        <p><apex:outPutText value="{!Q.question.Question__c}"/></p>
+                                    </apex:column>
+                                </apex:dataTable>
+                                <br/>
+                                    <apex:pageblockSection collapsible="false" columns="1" title="Choices">
+                                        <!-- table for choices  -->
+                                        <apex:pageBlockTable value="{!QandAWrapperList[ctr].choiceWrapList}" var="Choices" id="QATable" rowClasses="odd.even" styleClass="TableClass"  >
+                                            <div id = "chkDiv">
+                                                <apex:column style="width:2%">
+                                                    <apex:facet name="header">
+                                                        <apex:inputCheckBox id="chkMark" value="{!markReview}" rendered="{!marker}"/>
+                                                    </apex:facet>
+                                                    <apex:inputCheckBox id="chkAnswer" value="{!Choices.selected}" />
+                                                </apex:column> 
+                                            </div>
+                                            <apex:column style="width:98%;">
+                                                <apex:facet name="header"  ><apex:outputText value="Add to review list" rendered="{!marker}"/> </apex:facet>
+                                                    <apex:outputText value="{!Choices.questOp.Option__c}"/> 
+                                            </apex:column>
+                                            
+                                        </apex:pageBlockTable>
+                                        
+                                    </apex:pageblockSection>
+                                </apex:pageBlockSection>
+                                <apex:pageblockButtons location="bottom">
+                     
+                                        <apex:commandButton id="cmdNext" value="Next"  action="{!onNext}" reRender="mainForm" rendered="{!nextVisibility && start}" onClick="ShowLoading();" onComplete="CloseLoading();"/>
+                                        <apex:commandButton id="cmdSubmit" value="Back"  action="{!onSubmit}"  reRender="mainForm" rendered="{!submitVisibility && start}" onClick="ShowLoading();" onComplete="CloseLoading();"/>                               
+                                        <apex:commandButton id="cmdMark" value="Mark for review"  action="{!onMark}" reRender="mainForm" rendered="{!marker && start}" onClick="ShowLoading();" onComplete="CloseLoading();"/>                                
+                                        <apex:commandButton id="cmdMarkAll" value="Mark All for review" action="{!onMarkAll}" reRender="mainForm" rendered="{!marker && start}" onClick="ShowLoading();" onComplete="CloseLoading();"/>
+                                        <apex:commandButton id="cmdFinish" value="Submit Exam" status="actStatusId" onClick="ShowLoading();Submit()" reRender="none" rendered="{!finVisibility && start}" />
+                                
+                                    
+                             
+                                </apex:pageblockButtons>
+                                
+                            </apex:pageBlock>
+                            <apex:pageBlock rendered="{!rVisibility}">
+                                <apex:outPutLabel value="Question Numbers to Review" style="font-weight:bolder" rendered="{!rVisibility}"/>
+                                 <!-- table for questions to review  -->
+                                <apex:pageBlockTable value="{!QToReview}" var="QR" id="QATable" rowClasses="odd.even" styleClass="TableClass" rendered="{!rVisibility}" >              
+                                <apex:column id="column1" style="width:98%"  >
+                                    <apex:outputText >{!(if(QtoReview[QR]==true, text(QR) & '*', QR))}</apex:outputText>
+                                    <apex:actionSupport event="onclick" action="{!onReviewAnswer}" rerender="mainForm" status="actStatusId">
+                                        <apex:param name="Qno" value="{!QR}" assignTo="{!ctr}" />
+                                    </apex:actionSupport>
+                                    <!-- <apex:param name="Qno" value="{!QR}" /> -->
+                                    <!--<apex:commandLink action="{!onReviewAnswer}" value="{!(if(QtoReview[QR]==true, text(QR) & '*', QR))}" id="theCommandLink" reRender="mainForm">
+                                        <apex:param name="Qno" value="{!QR}" assignTo="{!ctr}" />
+                                    </apex:commandLink>-->
+                                </apex:column>        
+                                
+                               </apex:pageBlockTable>
+                                
+                                <br/>
+                                
+                            <apex:pageblockButtons location="bottom">
+                                  <apex:commandButton id="cmdFinish2" value="Submit Exam"  onClick="ShowLoading();Submit()" reRender="none"/>                           
+                            </apex:pageblockButtons>
+                        </apex:pageblock>
+                        
+                    </apex:form>
+                </div>
+        <div id = "footer">
+        </div>
+    </div>
+    <script src="{!$Resource.JQuery}"/>
+    <script src="{!$Resource.JQueryUI}"/>
+    <script type="text/javascript">
+        var timeLimit = {!timeLimit};
+    </script>
+    <script src="{!$Resource.ExamBehavior}"/>
+
+</apex:page>

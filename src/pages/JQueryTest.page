@@ -1,0 +1,120 @@
+<apex:page >
+   	<apex:includeScript value="{!URLFOR($Resource.JQuery)}"  />
+   	<apex:includeScript value="{!URLFOR($Resource.JQueryUI)}"  />
+   	<head>
+   		<style>
+   			.ui-accordion .ui-accordion-header {
+  				cursor: pointer;
+				position: relative;
+				margin-top: 1px;
+				zoom: 1;
+			}
+			.ui-accordion .ui-accordion-li-fix {
+			  	display: inline;
+			}
+			.ui-accordion .ui-accordion-header-active {
+			  	border-bottom: 0 !important;
+			}
+			.ui-accordion .ui-accordion-header a {
+				display: block;
+				font-size: 1em;
+				padding: .5em .5em .5em .7em;
+			}
+			/* IE7-/Win - Fix extra vertical space in lists */
+			.ui-accordion a {
+			  	zoom: 1;
+			}
+			.ui-accordion-icons .ui-accordion-header a {
+			  	padding-left: 2.2em;
+			}
+			.ui-accordion .ui-accordion-header .ui-icon {
+				position: absolute;
+				left: .5em;
+				top: 50%;
+				margin-top: -8px;
+			}
+			.ui-accordion .ui-accordion-content {
+				padding: 1em 2.2em;
+				border-top: 0;
+				margin-top: -2px;
+				position: relative;
+				top: 1px;
+				margin-bottom: 2px;
+				overflow: auto;
+				display: none;
+				zoom: 1;
+			}
+			.ui-accordion .ui-accordion-content-active {
+			  	display: block;
+			}
+   		</style>
+   	</head>
+ 	<div id = "body">
+ 		<apex:form >
+ 			<apex:pageBlock >
+				<div class = "accordion" id = "section1">
+					<h3><a href = "#">Section 1</a></h3>
+					<!-- <apex:pageBlockSection title="Section 1" collapsible="false">
+					 </apex:pageBlockSection> -->
+					<div id = "text1">  
+				       hello<br/>
+				       goodbye
+				    </div>
+				
+				    <h3><a href = "#">Section 2</a></h3>
+				    <!-- <apex:pageBlockSection title="Section 2" collapsible="false">
+					 </apex:pageBlockSection> -->
+				     <div id = "text2">
+					   
+				       hi
+					      
+					 </div>   
+					 
+					 <h3><a href = "#">Section 3</a></h3>
+					 <!-- <apex:pageBlockSection title="Section 3" collapsible="false">
+					 </apex:pageBlockSection> -->
+					 <div id = "text3">
+					   
+				       bye
+					    
+					</div>
+				</div>
+			</apex:pageBlock>
+		</apex:form>
+	</div>	 
+		
+  	<script type="text/javascript">
+  		//var $ = jQuery.noConflict();
+  		
+  		(function($){
+  			
+  		})(jQuery);
+   		$(document).ready(function() {
+		   
+		    
+		    $(".accordion").accordion({
+		    	collapsible : true, 
+		    	active : false
+	    	});
+		  //  alert('Jquery');
+		});
+		var a = $('input[id$=ahoo');
+		a.val('ahooooooooooooo');
+		a.width('10');
+		$('#text1').val("hahahahaha");
+		$('input[id$=text]').change(function(){
+			//$('input[id$=text]').val("sasasa");
+		});
+		
+		
+		
+		
+		
+		
+		
+    
+    </script>
+ 
+    
+    
+</apex:page>

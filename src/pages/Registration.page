@@ -1,0 +1,118 @@
+<apex:page standardController="Contact" extensions="registrationController" showHeader="false" >
+
+    <head>
+        <title>Registration</title>
+        <link rel = "stylesheet" type = "text/css" href = "{!$Resource.RegistrationDesign}"/>
+    </head>
+    <apex:outputLabel >
+    	<apex:pagemessages />
+    </apex:outputLabel>
+    <div id  = "container">
+    
+        <div id = "header">
+            Registration
+        </div>
+        
+        <div id = "leftSide">
+            
+        </div>
+        <div id = "body">
+            <div id ="multilist">
+                <h1>Courses</h1>
+                
+                <apex:form >
+                    <center>
+                        <apex:panelGrid columns="3" id="abcd">
+                            <apex:selectList id="sel1" value="{!leftselected}" multiselect="true" style="width:250px" size="14">
+                                <apex:selectOptions value="{!unselectedvalues}" />
+                            </apex:selectList>
+                                <apex:panelGroup >
+                                    <br/>
+                                    <apex:commandButton action="{!selectclick}" value="Add" style="width:80px" reRender="abcd"/>
+                                    	
+
+                                    <!-- <apex:image value="{!$Resource.multiselected}">
+                                        <apex:actionSupport event="onclick" action="{!selectclick}" reRender="abcd"/>
+                                    </apex:image>  -->
+                                    
+                                    <br/><br/>
+                                    <apex:commandButton action="{!unselectclick}" value="Remove" style="width:80px" reRender="abcd"/ 	>
+                                    	
+                                    
+                                    <!-- <apex:image value="{!$Resource.multiunselected}">
+                                        <apex:actionSupport event="onclick" action="{!unselectclick}" reRender="abcd"/>
+                                    </apex:image> -->
+                                </apex:panelGroup>
+                            <apex:selectList id="sel2" value="{!rightselected}" multiselect="true" style="width:250px" size="14">
+                                <apex:selectOptions value="{!SelectedValues}" />
+                            </apex:selectList>
+                        </apex:panelGrid>
+                        
+                    </center>
+                    <div id ="buttonSave">
+                        <apex:commandButton action="{!onSave}" value="Save" style="width:80px" />
+                    </div>
+                </apex:form>
+                
+            </div>
+            
+            <!-- Please select required status:
+            <apex:form >
+                <apex:selectList size="1" value ="{}">
+               
+                    <<apex:selectOptions value="{}"/> 
+                </apex:selectList> 
+            </apex:form>   -->
+            <!-- <apex:form >
+                <apex:selectList id="c" value="{!Accounts}"  multiselect="true"  onclick="SelectAllCountry();" > Channel :
+                
+                
+                <apex:selectOptions rendered="true" value="{!Courses}"/>
+                </apex:selectList><p/>
+                
+                 
+                <apex:outputPanel id="out">
+                <apex:actionstatus id="status" startText="testing...">
+                <apex:facet name="stop">
+                <apex:outputPanel >
+                <p>You have selected:</p>
+                <apex:dataList value="{!countries}" var="c">{!c}</apex:dataList>
+                </apex:outputPanel>
+                </apex:facet>
+                </apex:actionstatus>
+                </apex:outputPanel>
+                  
+                <script>
+                 
+                    function SelectAllCountry() {
+                     
+                    
+                    }
+                </script>
+                </apex:selectList>
+            </apex:form> -->
+                
+                <!-- <apex:MultiselectPicklist leftLabel="Available Contacts"
+
+                        leftOptions="{!allContacts}"
+                    
+                        rightLabel="Selected Contacts"
+                    
+                        rightOptions="{!selectedContacts}"
+                    
+                        size="14"
+                    
+                        width="150px"/>
+                </apex:MultiselectPicklist> -->
+                
+        </div>
+        <div id = "rightSide">
+            
+        </div>
+        <div id = "footer">
+            
+        </div>
+        
+    </div>
+    
+</apex:page>

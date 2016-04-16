@@ -1,0 +1,16 @@
+<apex:page controller="ApproveOrRejectLeaveApplicationCC" >
+	<apex:form id="mainform">
+		<apex:pageblock >
+			<apex:pageblocktable value="{!leaveMap}" var="LM" rowClasses="odd,even" styleClass="tableClass">
+				<apex:column >
+					<!-- <apex:inputcheckbox value="{!leaveMap[LM].selected}"/> -->
+				</apex:column>
+				<apex:column >
+					<apex:facet name="header"/>
+					<apex:outputtext value="{!leaveMap[1][1].leave.id}"/>
+				</apex:column>
+			</apex:pageblocktable>
+			<apex:commandbutton value="reject" action="{!onReject}" rerender="mainForm"/>
+		</apex:pageblock>
+	</apex:form>
+</apex:page>

@@ -1,0 +1,132 @@
+<!--
+/**
+ * @description Search for Attendees
+ * @author Created By Noy De Goma
+ * @date Created Date July 24, 2013
+ */
+-->
+
+<apex:page standardController="Call_Report__c"  extensions="AttendeesSearchCC"> 
+    <Head>
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="{!$Resource.AttendeesSearchDesign}"/>   
+    </Head>
+    <div id ="container">
+    
+    <apex:form id="AttendeeForm">
+        <div id = "header">
+            <div class = "searchSection">
+                <apex:inputText tabindex="1" onfocus="onFocus();" onblur="onBlur();" id="txtSearch" value="{!inputSearch}" style="height:15px;top:20px;"/>
+                <apex:commandButton tabindex="2" action="{!onSearch}" value="Search" id="cmdSearch" style="width:80px;top:20px;" reRender="AttendeeForm"/>
+                <apex:outputText escape="false" value="<b>{!message}</b>"/>
+            </div>
+        
+        </div>
+        <apex:outputLabel >
+        	<apex:pagemessages />
+        </apex:outputLabel>
+        <div id = "bg">
+            <apex:pageBlock >
+                <apex:pageBlockButtons >
+                    <apex:commandButton action="{!onSave}" value="Save" id="cmdSave" style="width:80px"/>
+                    <apex:commandButton action="{!onCancel}"  value="Cancel" id="cmdCancel" style="width:80px"/>
+                </apex:pageBlockButtons>
+                
+            
+                <apex:pageBlockSection title="Search Results" collapsible="false" columns="1">
+                    <!-- <apex:outputLabel value="Search Results" style="position:relative;left:-8px;font-weight:bolder;color:#057064"/> -->
+                <!-- </apex:pageBlockSection> -->
+                    <apex:pageBlockTable title="Search Results"  columns="4" value="{!AttendeeList}" var="Attendee" id="AttendeeTable" rowClasses="odd,even" styleClass="tableClass">
+                        
+                        <apex:column style="width:10%"> 
+                            <apex:facet name="header">
+                                <apex:inputCheckbox id="selectAll" value="{!allSelected}" label="Select All" onClick="checkAll(this,'chkSelect')" > 
+                                    <apex:outputLabel value="Select All"/>
+                                </apex:inputCheckbox>
+                                
+                            </apex:facet>   
+                            <apex:inputCheckbox id="chkSelect" value="{!Attendee.selected}"  />
+                        </apex:column>
+                        
+                        <apex:column style="width:25%">
+            
+                            <apex:facet name="header">Firstname</apex:facet>
+                            <apex:outputText value="{!Attendee.attendeeFname}"/>
+                            <!-- <apex:outputText value="{!Attendee.usr.firstname}"/> -->
+            
+                        </apex:column>
+                        <apex:column style="width:25%">
+                        
+                            <apex:facet name="header">Last Name</apex:facet>
+                            
+                            <apex:outputText value="{!Attendee.attendeeLname}"/>
+                            <!-- <apex:outputText value="{!Attendee.usr.lastname}"/> -->
+                            
+                        </apex:column>
+                        <apex:column style="width:40%">
+                        
+                            <apex:facet name="header">Email</apex:facet>
+                            
+                            <apex:outputText value="{!Attendee.attendeeEmail}"/>
+                            <!-- <apex:outputText value="{!Attendee.usr.lastname}"/> -->
+                        </apex:column>
+                    </apex:pageBlockTable> 
+            	</apex:pageBlockSection>
+                <apex:pageBlockSection title="Selected Attendees" collapsible="false" columns="1">
+                    <!-- <apex:outputLabel value="Selected Attendees" style="position:relative;left:-8px;font-weight:bolder;color:#057064"/>
+                </apex:pageBlockSection> -->
+	                <apex:pageBlockTable title="Selected Attendees" columns="4" value="{!AttendeeListSelected}" var="Attendee" id="AttendeeTable2" rowClasses="odd,even" styleClass="tableClass">
+	                    <apex:column style="width:10%">
+	                        <apex:facet name="header">
+	                            <apex:inputCheckbox id="removeAll" value="{!allRemove}" label="Select All"  onClick="checkAll(this,'chkRemove')" > 
+	                                <apex:outputLabel value="Select All"/>
+	                            </apex:inputCheckbox>
+	                            
+	                        </apex:facet>
+	                        <apex:inputCheckbox id="chkRemove" value="{!Attendee.selected}"/>
+	                        
+	                    </apex:column>
+	                    
+	                    <apex:column style="width:25%">
+	                    
+	                        <apex:facet name="header">First name</apex:facet>
+	                        <apex:outputText value="{!Attendee.attendeeFname}"/>
+	                        <!-- <apex:outputText value="{!Attendee.usr.firstname}"/> -->
+	                        
+	                    </apex:column>
+	                    <apex:column style="width:25%">
+	                    
+	                        <apex:facet name="header">Last Name</apex:facet>
+	                        
+	                        <apex:outputText value="{!Attendee.attendeeLname}"/>
+	                        <!-- <apex:outputText value="{!Attendee.usr.lastname}"/> -->
+	                        
+	                    </apex:column>
+	                    
+	                    <apex:column style="width:40%">
+	                    
+	                        <apex:facet name="header">Email</apex:facet>
+	                        
+	                        <apex:outputText value="{!Attendee.attendeeEmail}"/>
+	                        <!-- <apex:outputText value="{!Attendee.usr.lastname}"/> -->
+	                        
+	                    </apex:column>
+	                    
+	                </apex:pageBlockTable>
+                </apex:pageBlockSection>
+                <apex:commandButton action="{!onSelect}" value="Add Attendees" id="cmdAddAttendees" onComplete="addAll()" style="width:120px" reRender="AttendeeForm" />
+                <apex:commandButton action="{!onRemove}" value="Remove Attendees" id="cmdRemoveAttendess" onComplete="removeAll()" style="width:120px" reRender="AttendeeForm"/>
+                
+            </apex:pageBlock>
+        </div>
+    </apex:form>
+        <script src = "{!$Resource.JQuery}">
+        </script>
+        <script src ="{!$Resource.JQueryUI}">
+        </script>
+        <script src ="{!$Resource.AttendeesSearchBehavior}" >   
+        	
+        </script>
+    </div>
+    
+</apex:page>

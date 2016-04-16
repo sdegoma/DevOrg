@@ -1,0 +1,23 @@
+<apex:page >
+    <style>
+    
+    </style>
+    <apex:form >
+         <apex:inputCheckbox onClick="test(this.checked, '{!$Component.test}' )"/>
+         <apex:commandButton styleClass="btn" id="test" value="Test" disabled="true" onclick="alert('hey')"/>
+    </apex:form>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"/>
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script>
+        
+         function test(val, elemId){
+             var but = $("[id$=test]")
+             if (val===false){
+                 but.toggleClass('btnDisabled', true).attr('disabled', 'disabled');
+             }else{
+                 but.toggleClass('btnDisabled', false).attr('disabled', null);
+             }
+         }
+     </script>
+</apex:page>

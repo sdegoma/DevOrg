@@ -1,0 +1,36 @@
+<apex:page >
+    <head>
+        
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.10.2/themes/ui-lightness/jquery-ui.css"/>
+        
+    </head>
+    <div class="ui-widget collapse">
+        <div id="expander-demo-control" class="ui-widget-header"> 
+            <span class="ui-icon ui-expander" style="float: left; margin: 5px;">+</span> 
+            <span>Header</span>
+            <div class="ui-helper-clearfix"></div>
+        </div>
+        <div id="expander-demo" class="ui-widget-content">
+            <p>
+                <apex:pageblock >
+                    <apex:pageblocksection >
+                        dafkdhafdkfa<br/>
+                        alfjdlkafkjhakjf<br/>
+                        akjfdljalkjfdlkajfds<br/>
+                        fdhakhfkjda
+                    </apex:pageblocksection>
+                </apex:pageblock>  
+            </p>
+        </div>
+    </div>
+
+    
+    <apex:includeScript value="{!URLFOR($Resource.Accordion, '/js/jquery.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Accordion, '/js/jquery.collapsiblepanel.js')}"/>
+
+    <script type="text/javascript">
+        $().ready(function () {
+            $('.collapse').collapsiblePanel();
+        });
+    </script>
+</apex:page>

@@ -1,0 +1,27 @@
+<apex:page standardController="Account" extensions="opportunityTable">
+<apex:pageBlock >
+    
+    <apex:pageBlockTable value="{!Opportunities}" var="Opportunity" id="theTable" rowClasses="odd,even" styleClass="tableClass">
+
+        <apex:facet name="caption"><strong><font size = "5">Opportunity Details</font></strong></apex:facet>
+
+        <apex:facet name="header">Opportunities</apex:facet>
+
+        <apex:column >
+
+            <apex:facet name="header">Name</apex:facet>
+
+            <apex:outputText value="{!Opportunity.name}"/>
+
+        </apex:column>
+        
+        <apex:column >
+
+            <apex:facet name="header">Stage Name</apex:facet>
+
+            <apex:outputText value="{!Opportunity.stagename}"/>
+        </apex:column>
+
+    </apex:pageBlockTable>
+</apex:pageBlock>
+</apex:page>

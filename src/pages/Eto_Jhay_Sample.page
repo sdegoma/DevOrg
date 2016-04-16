@@ -1,0 +1,18 @@
+<apex:page standardController="Account" extensions="TestAccountCC" >
+    <apex:form >
+        <apex:repeat value="{!listWrap}" var="lw">
+          
+                
+           
+              <apex:inputField value="{!lw.acc.name}"/>
+                <apex:inputCheckBox value="{!lw.selected}"/>                          
+             
+         
+        </apex:repeat>
+         <apex:commandButton value="save" action="{!onsave}" rerender="test"/>
+    </apex:form>
+    <apex:form id="test">
+        <apex:pagemessages />
+       
+    </apex:form>
+</apex:page>

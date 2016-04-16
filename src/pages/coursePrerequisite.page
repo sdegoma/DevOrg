@@ -1,0 +1,6 @@
+<apex:page standardController="Contact" extensions="registrationController" showHeader="false" >
+	<apex:pageblock >
+		There are some courses that you were not able to enroll due to the reason that the course has a prerequisite that you have not yet taken or have failed.
+	</apex:pageblock>
+    
+</apex:page>
