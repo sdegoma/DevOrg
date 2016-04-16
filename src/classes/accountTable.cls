@@ -1,7 +1,7 @@
 public class accountTable {
 
    public accountTable(ApexPages.StandardController controller) {
-   //this is a test
+   //this is a test.
    }
 
  
